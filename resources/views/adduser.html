@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sach quan tri</title>
+</head>
+<style>
+    #root {
+        width: 800px;
+        margin: 0 auto;
+        background-color: rgb(250, 242, 242);
+    }
+
+    input {
+        width: 100%;
+    }
+</style>
+
+<body>
+    <div id="root">
+        <h2>Them sinh vien</h2>
+        <form>
+            <label for="fname">Ten</label>
+            <input type="text" id="fname" name="fname">
+            <label for="fname">Email</label>
+            <input type="text" id="fname" name="fname">
+            <label for="fname">Password</label>
+            <input type="text" id="fname" name="fname">
+            <button type="submit">Them</button>
+        </form>
+    </div>
+    <!-- <script>
+        export default {
+          data() {
+            return {
+              user: {
+                name: "",
+                email: "",
+              },
+              selectedUser:{},
+              errors: [],
+              list_users:[],
+              user_item:[],
+
+            };
+          },
+          created() {
+            this.getListUser();
+          },
+          methods: {
+              getListUser(){
+                axios.get('api/users')
+                .then(response=>{
+                    this.list_users=response.data.data;
+                })
+            },
+            createUser() {
+              axios.post("api/users", {
+                  name: this.user.name,
+                  email: this.user.email,
+                  password: this.user.password,
+                })
+                .then(response => {
+                    this.list_users.push(response.data.data);
+                })
+                .catch((error) => {
+                  this.errors = error.response.data.errors.name;
+                });
+            },
+          },
+        };
+        </script> -->
+</body>
+
+</html>

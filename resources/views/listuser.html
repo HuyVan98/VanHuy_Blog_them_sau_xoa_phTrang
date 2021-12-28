@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sach quan tri</title>
+</head>
+<style>
+    #root {
+        width: 800px;
+        margin: 0 auto;
+        background-color: rgb(250, 242, 242);
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        text-align: center;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 16px;
+    padding: 10px;
+    }
+</style>
+
+<body>
+    <div id="root">
+
+        <h2>Danh sach sinh vien</h2>
+        <a href=""><button class="button" type="button">Them</button></a>
+        <table>
+            <tr>
+                <th>Ten</th>
+                <th>Email</th>
+                <th>Tuy chon</th>
+            </tr>
+            <tr>
+                <td>Huy Van</td>
+                <td>vanhuyutehy@gmail.com</td>
+                <td><a href="">Sua</a> <a href="">xoa</a></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
+<template>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Ví dụ về Phân trang với Laravel 5.4 và Vue.js 2</div>
+                    <div class="panel-body">
+
+                        <div class="panel panel-default" v-for="user in users" :user="user" :key="user.id">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" v-text="user.name"></h3>
+                            </div>
+                            <div class="panel-body">
+                                <p v-text="user.email"></p>
+                            </div>
+                        </div>
+                        <!-- <user v-for="user in users" :user="user" :key="user.id"></user> -->
+                    </div>
+                    <pagination v-bind:pagination="pagination" v-on:click.native="getUsers(pagination.current_page)" :offset="4"></pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import User from '../Users.vue'
+    import Pagination from '../Pagination.vue'
+    export default {
+        components: { User, Pagination },
+        data () {
+            return {
+                users: [],
+                counter: 0,
+                pagination: {
+                    total: 0,
+                    per_page: 2,
+                    from: 1,
+                    to: 0,
+                    current_page: 1
+                },
+                offset: 4
+            }
+        },
+        mounted() {
+            this.getUsers(this.pagination.current_page);
+        },
+        methods: {
+            getUsers (page) {
+                axios.get('api/users?page='+page)
+                    .then((response) => {
+                        this.users = response.data.data_users.data
+                        this.pagination = response.data.data_users
+                    })
+            }
+        }
+    }
+</script>
