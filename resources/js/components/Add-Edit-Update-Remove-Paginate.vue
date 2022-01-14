@@ -92,12 +92,13 @@ export default {
       getListUser(page){
         axios.get('api/users?page='+page)
         .then(response=>{
+            console.log(response);
             this.list_users=response.data.data_users.data;
             this.pagination = response.data.data_users
             // console.log(response.data.data_users);
-            this.list_users.forEach(item=>{
-                Vue.set(item, 'isEdit', false)
-            })
+            // this.list_users.forEach(item=>{
+            //     Vue.set(item, 'isEdit', false)
+            // })
         })
     },
     mounted() {

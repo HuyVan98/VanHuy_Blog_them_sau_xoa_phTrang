@@ -22,7 +22,6 @@ class UserController extends ApiController
 
     public function store(Request $request)
     {
-        dd($request->all());
         // $ruler = [
         //     'name' => 'required',
         //     'email' => 'required|email|unique:users',
